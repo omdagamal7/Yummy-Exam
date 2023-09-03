@@ -9,9 +9,16 @@ export class Home {
     this.slideNav();
     this.instanceOtherClasses();
     this.getDataFromAPI();
-
+    this.runSection();
   }
-  // ! ====  NAV BAR ANIMATIONS ====
+  // ! ====  IF CLICK ON LOGO RETURN TO HOME PAGE ==== ! \\
+  runSection(){
+    $(".mainImg").click(()=>{
+      $("#home").siblings('section').fadeOut(100);
+      $("#home").fadeIn(400);
+    })
+}
+  // ! ====  NAV BAR ANIMATIONS  ==== ! \\
     slideNav(){
     $(".bars").click(()=>{
       $("nav").animate({left: "0"},700);
@@ -54,6 +61,7 @@ export class Home {
         });
       });
     }
+  // ! ====   INSTANCE OTHER CLASSES   ==== ! \\
     instanceOtherClasses(){
       $("#Categorys").click(()=>{
         new Category();
@@ -72,12 +80,14 @@ export class Home {
       });
 
     }
+  // ! ====  CALL API FOR GET HOME DATA  ==== ! \\
     async getDataFromAPI(){
     $(".loading-page").removeClass("d-none");
       const request = await fetch(`https://themealdb.com/api/json/v1/1/search.php?s=`);
       this.response = await request.json();
       this.displayData(this.response.meals);
     }
+  // ! ====  DISPLAY DATA OF HOME  ==== ! \\
     displayData(data){
       let box = '';
       for (let i = 0; i < data.length; i++) {
@@ -102,12 +112,14 @@ export class Home {
       });
       $(".loading-page").addClass("d-none");
     }
+  // ! ====  CALL API FOR GET MEALS HOME DETAILS  ==== ! \\
     async getHomeDetails(id){
       $(".loading-page").removeClass("d-none");
       let response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
       this.Request = await response.json();
       this.displayHomeDetails(this.Request.meals);
     }
+  // ! ====  DISPLAY MEALS HOME DETAILS  ==== ! \\
     displayHomeDetails (data) {
       let tags = [];
       let tagsStr = '';

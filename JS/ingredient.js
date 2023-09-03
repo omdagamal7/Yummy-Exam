@@ -4,10 +4,12 @@ export class Ingredient {
     this.getIngredientFromAPI();
     this.runSection();
   }
+  // ! ====  HIDE OTHER SECTIONS AND SHOW THIS  ==== ! \\
   runSection(){
     $("#ingredient").siblings().fadeOut(100);
     $("#ingredient").fadeIn(400);
 }
+  // ! ====  CALL API FOR GET INGREDIENTS  ==== ! \\
   async getIngredientFromAPI(){
     $(".loading-page").removeClass("d-none");
     const requestIng = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`);
@@ -16,9 +18,8 @@ export class Ingredient {
 
 
   }
-
-    // ! ====== DISPLAY INGREDIENT =======
-    displayIngredient(data){
+  // ! ====== DISPLAY INGREDIENTS ======= ! \\
+  displayIngredient(data){
       let Ing = '';
       for (let i = 0; i < data.length; i++) {
         if (i < 25) {
@@ -50,6 +51,7 @@ export class Ingredient {
 
     
   }
+  // ! ====  TAKE A INGREDIENT TO CALL API FOR GET DATA BY INGREDIENTS  ==== ! \\
   async getDataOfIngredient(Ing){
     $(".loading-page").removeClass("d-none");
     const requestIngVal = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${Ing}`);
@@ -57,6 +59,7 @@ export class Ingredient {
     this.displayIngredientValues(this.responseIngVal.meals);
 
   }
+  // ! ====  DISPLAY MEALS OF INGREDIENT  ==== ! \\
   displayIngredientValues(data){
     let box = '';
     for (let i = 0; i < data.length; i++) {
@@ -91,6 +94,7 @@ export class Ingredient {
       $("#ingredients").fadeIn(400);
     })
   }
+  // ! ====  GET DETAILS OF MEALS  ==== ! \\
   async getIngDetails(id){
     $(".loading-page").removeClass("d-none");
     const requestIngDetails = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -98,6 +102,7 @@ export class Ingredient {
     this.displayIngDetails(this.responseIngDetails.meals);
 
   }
+  // ! ====  DISPLAY DETAILS OF MEALS  ==== ! \\
   displayIngDetails(data){
     let tags = [];
     let tagsStr = '';

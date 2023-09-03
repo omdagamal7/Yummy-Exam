@@ -3,10 +3,12 @@ export class Search {
     this.getValueOfInput();
     this.runSection();
   }
+  // ! ====  HIDE OTHER SECTIONS AND SHOW THIS  ==== ! \\
   runSection(){
     $("#search").siblings().fadeOut(100);
     $("#search").fadeIn(400);
 }
+  // ! ====  GET SEARCH VALUES => NAME MEAL & FIRST LETTER MEAL  ==== ! \\
   getValueOfInput(){
       $("#searchName").on("input",()=>{
         let nameValue = $("#searchName").val();
@@ -19,16 +21,16 @@ export class Search {
         
       $('#search').fadeIn(1000);
       $("#display").fadeOut(1000);
-      this.switchPages();
+      this.changePages();
   }
-  switchPages(){
+  // ! ====  CLEAR SEARCH INPUTS  ==== ! \\
+  changePages(){
     $('#Search').parent().siblings().children().click(function () {
-      $('#search').fadeOut(1000);
-      $('#display').fadeIn(1000);
       document.querySelectorAll(".inputsSearch input")[0].value = "";
       document.querySelectorAll(".inputsSearch input")[1].value = "";
     })
   }
+  // ! ====  CALL API FOR GET SEARCH DATA BY NAME  ==== ! \\
   async getSearchByNameData (name){
     $(".loading-page-search").removeClass("d-none");
     const requestSearch = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
@@ -37,6 +39,7 @@ export class Search {
     $(".loading-page-search").addClass("d-none");
 
     }
+    // ! ====  CALL API FOR GET SEARCH DATA BU FIRST LETTER  ==== ! \\
   async getSearchByletterData (letter){
     $(".loading-page-search").removeClass("d-none");
     const requestSearch = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`);
@@ -45,6 +48,7 @@ export class Search {
     $(".loading-page-search").addClass("d-none");
 
   }
+    // ! ====  DISPLAY DATA OF NAME & FIRST LETTER  ==== ! \\
   displaySearchData(data) {
 
     let food = '';
@@ -70,6 +74,7 @@ export class Search {
     });
     
   }
+    // ! ====  GET DETAILS OF MEALS  ==== ! \\
   async getDetailsOfSearch(id){
     $(".loading-page-search").removeClass("d-none");
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -77,6 +82,7 @@ export class Search {
     this.displayDataSearch(this.Request.meals);
 
   }
+    // ! ====  DISPLAY DATA OF MEAL  ==== ! \\
   displayDataSearch (data) {
     let tags = [];
     let tagsStr = '';

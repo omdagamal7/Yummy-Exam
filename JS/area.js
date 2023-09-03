@@ -3,16 +3,19 @@ export class Area {
     this.getAreaFromAPI();
     this.runSection();
   }
+  // ! ====  HIDE OTHER SECTIONS AND SHOW THIS  ==== ! \\
   runSection(){
       $("#AreaS").siblings().fadeOut(100);
       $("#AreaS").fadeIn(400);
   }
+  // ! ====  CALL API FOR GET AREAS  ==== ! \\
   async getAreaFromAPI(){
     $(".loading-page").removeClass("d-none");
     const requestArea = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
     this.responseArea = await requestArea.json();
     this.displayArea(this.responseArea.meals);
   }
+  // ! ====  DISPLAY AREAS  ==== ! \\   
   displayArea(data){
     let area = '';
     for (let i = 0; i < data.length; i++) {
@@ -40,6 +43,7 @@ export class Area {
       });
     });
 }
+  // ! ====  TAKE A AREA TO CALL API FOR GET DATA BY AREA  ==== ! \\
   async getAreasData(data){
     $(".loading-page").removeClass("d-none");
     const requestAreaData = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${data}`);
@@ -47,6 +51,7 @@ export class Area {
     this.displayAreaData(this.responseAreaData.meals);
 
 }
+  // ! ====  DISPLAY MEALS OF AREA  ==== ! \\
   displayAreaData(data){
     let box = '';
     for (let i = 0; i < data.length; i++) {
@@ -80,12 +85,14 @@ export class Area {
       $("#area").fadeIn(400);
     });
   }
+  // ! ====  GET DETAILS OF MEALS  ==== ! \\
   async getAreaDetails(id){
     $(".loading-page").removeClass("d-none");
     const requestAreaDetails = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     this.responseAreaDetails = await requestAreaDetails.json();
     this.displayAreaDetails(this.responseAreaDetails.meals);
   }
+  // ! ====  DISPLAY DETAILS OF MEALS  ==== ! \\
   displayAreaDetails(data){
     let tags = [];
     let tagsStr = '';

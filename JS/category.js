@@ -6,10 +6,12 @@ export class Category {
     this.getCategoriesFromAPI();
     this.runSection();
   }
+  // ! ====  HIDE OTHER SECTIONS AND SHOW THIS  ==== ! \\
   runSection(){
     $("#category").siblings().fadeOut(100);
     $("#category").fadeIn(400);
   }
+  // ! ====  CALL API FOR GET CATEGORIES  ==== ! \\
   async getCategoriesFromAPI(){
     $(".loading-page").removeClass("d-none")
     const request = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
@@ -17,7 +19,7 @@ export class Category {
     this.displayCategory(this.response.categories);
 
   }
-  // ! ======  DISPLAY CATEGORY  ======
+  // ! ====  DISPLAY CATEGORIES  ==== ! \\   
   displayCategory(data){
     let cate = '';
     for (var i = 0; i < data.length; i++) {
@@ -46,12 +48,14 @@ export class Category {
     });
   });
   }
+  // ! ====  TAKE A CATEGORY TO CALL API FOR GET DATA BY CATEGORIES  ==== ! \\
   async getCategoryMeal(category){
     $(".loading-page").removeClass("d-none");
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
     this.response = await response.json();
     this.displayMeal(this.response.meals.slice(0, 20));
   }
+  // ! ====  DISPLAY MEALS OF CATEGORY  ==== ! \\
   displayMeal(arr){
 
     let data = "";
@@ -89,6 +93,7 @@ export class Category {
         })
         
   }
+  // ! ====  GET DETAILS OF MEALS  ==== ! \\
   async getMealDetails(id){
     $(".loading-page").removeClass("d-none");
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -96,6 +101,7 @@ export class Category {
     this.displayMealDetails(this.mealRequest.meals);
 
   }
+  // ! ====  DISPLAY DETAILS OF MEAL  ==== ! \\
   displayMealDetails(data){
     let tags = [];
     let tagsStr = '';
