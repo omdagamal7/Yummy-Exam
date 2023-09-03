@@ -84,21 +84,36 @@ export class Search {
   }
     // ! ====  DISPLAY DATA OF MEAL  ==== ! \\
   displayDataSearch (data) {
+    let recipes = [];
     let tags = [];
     let tagsStr = '';
+    let recipesStr = ''
     let details = '';
     for (let i = 0; i < data.length; i++) {
+      // ? GET RECIPES
+      for (let index = 1; index <= 17 ; index++) {
+        recipes.push(data[i][`strIngredient${index}`])
+      }
+      // ? DISPLAY RECIPES
+      for (let index = 0; index < recipes.length; index++) {
+        if (recipes[index].length != 0) {
+          recipesStr += `
+          <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${recipes[index]}</div>
+          `
+        }
+      }
+      // ? GET TAGS
       tags.push(data[i].strTags?.split(","))
-      for (let index = 0; index < tags.length; index++) {
-          if (tags.length == 0 || tags[index] == undefined) {
-
-          }
-          else {
-            tags[index].map((tag)=>{
-              tagsStr += `<div class="alert alert-danger px- py-1">${tag}</div>`;
-            });
-          };
-      };
+      // ? DISPLAY TAGS
+        for (let index = 0; index < tags.length; index++) {
+            if (tags.length == 0 || tags[index] == undefined) {
+            }
+            else {
+              tags[index].map((tag)=>{
+                tagsStr += `<div class="alert alert-danger px- py-1">${tag}</div>`;
+              });
+            };
+        };
       details += `
       <div class="d-flex justify-content-end">
         <i class="fas fa-xmark fs-3 btn btn-dark justify-content-end" id="close"></i>
@@ -123,23 +138,7 @@ export class Search {
 
         <p class="fw-bold fs-3 d-block">Recipes: </p>
         <div class="recipes d-flex flex-wrap mb-4">
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient1}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient2}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient3}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient4}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient5}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient6}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient7}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient8}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient9}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient10}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient11}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient12}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient13}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient14}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient15}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient16}</div>
-        <div class="mt-3 alert py-1 px-3 alert-info me-3 rounded">${data[i].strIngredient17}</div>
+        ${recipesStr}
         </div>
         <div><p class="fs-3 fw-bold d-block">Tags: </p><div class="d-flex gap-3 flex-wrap">${tagsStr}</div><div class="d-flex gap-1">
         <div class="d-flex gap-2 flex-wrap">
