@@ -1,10 +1,8 @@
 export class Contact {
     constructor(){
       this.runValidations();
-      this.checkValidations();
       this.runSection();
-      this.counter = 0;
-    }
+         }
     // ! ====  HIDE OTHER SECTIONS AND SHOW THIS  ==== ! \\
     runSection(){
       $("#contactUs").siblings().fadeOut(100);
@@ -37,8 +35,7 @@ export class Contact {
         {
             nameInp.style.border='none';
             $('#invalidName').addClass('d-none');
-            this.counter++
-            console.log('this.counter: ', this.counter);
+            
             return true;
         } else 
         {
@@ -55,7 +52,7 @@ export class Contact {
         {
             emailInp.style.border='none';
             $('#invalidEmail').addClass('d-none');
-            this.counter++
+            
             return true;
         } else 
         {
@@ -71,7 +68,7 @@ export class Contact {
         if (regex.test(phoneInp.value)== true  ) {
             phoneInp.style.border='none';
             $('#invalidPN').addClass('d-none');
-            this.counter++
+            
             return true;
         } else 
         {
@@ -87,7 +84,7 @@ export class Contact {
       if (regex.test(ageInp.value)== true  ) {
           ageInp.style.border='none';
           $('#invalidAge').addClass('d-none');
-          this.counter++
+          
           return true;
       } else 
       {
@@ -103,7 +100,7 @@ export class Contact {
       if (regex.test(this.passwordInp.value)== true  ) {
           this.passwordInp.style.border='none'
           $('#invalidPass').addClass('d-none');
-          this.counter++
+          
           $("#submit").removeAttr("disabled")
           return true;
       } else 
@@ -114,10 +111,4 @@ export class Contact {
       };
       
     } 
-    checkValidations(){
-        if (this.counter >= 6) {
-            
-            console.log("log");
-        }
-    }
   }
