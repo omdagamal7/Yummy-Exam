@@ -128,7 +128,7 @@ export class Contact {
       
     } 
     runSubmit(){
-        if (this.counter <= 5) {
+        if (this.counter >= 5) {
             $("#submit").removeAttr("disabled")
         }
     }
